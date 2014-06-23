@@ -9,7 +9,7 @@ RUN usermod -g 100 nobody
 RUN apt-get update -q
 RUN apt-get install -qy deluged deluge-web
 
-#Path to a directory that only contains the nzbget.conf
+#Path to a directory that only contains the deluge.conf
 VOLUME /config
 VOLUME /downloads
 
@@ -17,6 +17,6 @@ EXPOSE 8112
 
 ADD start.sh /start.sh
 
-# Let's not run nzbget as root
+# Let's not run deluge as root
 USER nobody
 CMD ["/bin/bash", "/start.sh"]
