@@ -14,6 +14,7 @@ VOLUME /config
 VOLUME /downloads
 
 EXPOSE 8112
+EXPOSE 58846
 
 ADD start.sh /start.sh
 
