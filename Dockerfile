@@ -1,6 +1,12 @@
-FROM debian:jessie
+FROM phusion/baseimage:0.9.11
 MAINTAINER needo <needo@superhero.org>
 ENV DEBIAN_FRONTEND noninteractive
+
+# Set correct environment variables
+ENV HOME /root
+
+# Use baseimage-docker's init system
+CMD ["/sbin/my_init"]
 
 # Fix a Debianism of the nobody's uid being 65534
 RUN usermod -u 99 nobody
@@ -16,8 +22,12 @@ VOLUME /downloads
 EXPOSE 8112
 EXPOSE 58846
 
-ADD start.sh /start.sh
+# Add deluged to runit
+RUN mkdir /etc/service/deluged
+ADD deluged.sh /etc/service/deluged/run
+RUN chmod +x /etc/service/deluged/run
 
-# Let's not run deluge as root
-USER nobody
-CMD ["/bin/bash", "/start.sh"]
+# Add deluge-web to runit
+RUN mkdir /etc/service/deluge-web
+ADD deluge-web.sh /etc/service/deluge-web/run
+RUN chmod +x /etc/service/deluge-web/run
