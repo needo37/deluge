@@ -12,8 +12,9 @@ CMD ["/sbin/my_init"]
 RUN usermod -u 99 nobody
 RUN usermod -g 100 nobody
 
-RUN apt-get update -q
-RUN apt-get install -qy deluged deluge-web
+ADD sources.list /etc/apt/
+RUN apt-get update -qq
+RUN apt-get install -qy deluged deluge-web unrar unzip p7zip
 
 #Path to a directory that only contains the deluge.conf
 VOLUME /config
