@@ -15,7 +15,7 @@ RUN usermod -g 100 nobody
 RUN add-apt-repository ppa:deluge-team/ppa
 ADD sources.list /etc/apt/
 RUN apt-get update -qq
-RUN apt-get install -qy deluge unrar unzip p7zip
+RUN apt-get install -qy deluged deluge-web unrar unzip p7zip
 
 #Path to a directory that only contains the deluge.conf
 VOLUME /config
