@@ -1,3 +1,8 @@
 #!/bin/bash
 
-exec /sbin/setuser nobody deluged -d -c /config -L info -l /config/deluged.log
+if [ -z "$DELUGED_USER" ]
+then
+        DELUGED_USER=nobody
+fi
+
+exec /sbin/setuser $DELUGED_USER deluged -d -c /config -L info -l /config/deluged.log
